@@ -1,6 +1,5 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param, Query } from '@nestjs/common';
 import { StoreService } from './stores.service';
-//import { Store } from './schemas/store.schema';
 
 @Controller('api/stores')
 export class StoreController {
@@ -9,5 +8,14 @@ export class StoreController {
   @Get()
   async getAllStores() {
     return this.storeService.findAll();
+  }
+
+  @Get('by-cep/:cep')
+  async getStoresByCep(
+    @Param('cep') cep: string,
+    @Query('radius') radius?: string,
+  ) {
+    const raio = radius ? parseInt(radius) : 100;
+    return this.storeService.findStoresByCep(cep, raio);
   }
 }

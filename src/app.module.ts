@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { StoreModule } from './stores/stores.module';
+import { ConfigModule } from '@nestjs/config';
+import { DistanceService } from './services/distance.service';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -12,8 +14,10 @@ if (!mongoUri) {
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     MongooseModule.forRoot(mongoUri),
     StoreModule,
   ],
+  providers: [DistanceService],
 })
 export class AppModule {}

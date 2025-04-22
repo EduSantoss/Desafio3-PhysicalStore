@@ -1,10 +1,12 @@
-// store/schemas/store.schema.ts
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 
 export type StoreDocument = Store & Document;
 
-enum tipoLojas {'PDV', 'LOJA'};
+export enum TipoLojas {
+  PDV = 'PDV',
+  LOJA = 'LOJA'
+};
 
 @Schema()
 export class Store {
@@ -41,8 +43,8 @@ export class Store {
   @Prop({ required: true })
   state: string;
 
-  @Prop({ required: true })
-  type: tipoLojas; 
+  @Prop({ required: true, enum: TipoLojas })
+  type: TipoLojas; 
 
   @Prop({ required: true })
   country: string;
