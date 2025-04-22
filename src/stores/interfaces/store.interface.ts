@@ -1,4 +1,3 @@
-// src/stores/interfaces/store-response.interface.ts
 import { TipoLojas } from '../schemas/store.schema';
 
 export interface StoreResponse {

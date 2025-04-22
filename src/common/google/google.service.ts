@@ -8,6 +8,9 @@ export class GoogleService {
 
    async getDistanceFromMatrix(origin: string, destination: string): Promise<number> {
     try {
+      this.logger.debug(`Enviando para Google Distance Matrix:`);
+      this.logger.debug(`Origin: ${origin}`);
+      this.logger.debug(`Destination: ${destination}`);
       const response = await axios.get('https://maps.googleapis.com/maps/api/distancematrix/json', {
         params: {
           origins: origin,
@@ -20,6 +23,7 @@ export class GoogleService {
 
       if (data.status !== 'OK' || data.rows[0].elements[0].status !== 'OK') {
         this.logger.error('Erro na resposta da API Distance Matrix', data);
+        //this.logger.error(JSON.stringify(data, null, 2)); // log detalhado para erros
         throw new Error('Erro ao calcular distância pelo Google Maps');
       }
 

@@ -10,8 +10,12 @@ export enum TipoLojas {
 
 @Schema()
 export class Store {
+  
   @Prop({ required: true })
-  storeName: string;
+  name: string;
+
+  @Prop({ required: true })
+  cep: string;
 
   @Prop({ default: true })
   takeOutInStore: boolean;
@@ -35,13 +39,13 @@ export class Store {
   address3?: string;
 
   @Prop({ required: true })
-  city: string;
+  localidade: string;
 
   @Prop({ required: true })
-  district: string;
+  bairro: string;
 
   @Prop({ required: true })
-  state: string;
+  uf: string;
 
   @Prop({ required: true, enum: TipoLojas })
   type: TipoLojas; 
